@@ -1,5 +1,3 @@
-# main.tf
-
 terraform {
   required_providers {
     local = {
@@ -7,16 +5,29 @@ terraform {
       version = "~> 2.0"
     }
   }
+  
+  backend "remote" {
+    organization = "tu-organizacion"
+
+    workspaces {
+      name = "nombre-del-workspace"
+    }
+  }
 }
 
 provider "local" {}
 
-# Definición manual de la serie de Fibonacci hasta el número 21
 locals {
-  fibonacci_series = [0, 1, 1, 2, 3, 5, 8, 13, 20]
+  fibonacci_series = [0, 1, 1, 2, 3, 5, 8, 13, 21]
 }
 
-# Imprime la serie de Fibonacci en la consola
 output "fibonacci_series" {
   value = local.fibonacci_series
+}
+
+# Agregar la opción de no entrada al plan
+resource "null_resource" "example" {
+  provisioner "local-exec" {
+    command = "terraform plan -input=false && terraform apply -input=false"
+  }
 }
