@@ -25,9 +25,3 @@ output "fibonacci_series" {
   value = local.fibonacci_series
 }
 
-# Agregar la opción de no entrada al plan
-resource "null_resource" "example" {
-  provisioner "local-exec" {
-    command = "terraform plan -input=false && terraform apply -input=false"
-  }
-}
