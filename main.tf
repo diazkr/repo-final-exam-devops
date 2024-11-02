@@ -7,10 +7,10 @@ terraform {
   }
   
   backend "remote" {
-    organization = "tu-organizacion"
+    organization = "devops-UNAL-karen"
 
     workspaces {
-      name = "nombre-del-workspace"
+      name = "repo-final-exam-devops"
     }
   }
 }
